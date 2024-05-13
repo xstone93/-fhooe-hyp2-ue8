@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %}
+
+{% block title %}QuizQuest{% endblock %}
+
+{% block main %}
+
+{% if success %}
+    <div class="alert alert-success" role="alert">
+        {{ success }}
+    </div>
+{% endif %}
+
+<form action="{% if quiz is defined %} {{ url_for('/quizmodify') }} {% else %} {{ url_for('/quizcreate') }} {% endif %}" method="post">
+
+    <input type="hidden" name="id" value="{{ quiz.ID }}">
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <input type="text" class="form-control" id="title" name="title" required value="{{ quiz.Title }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea class="form-control" id="description" name="description" required>{{ quiz.Description }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="category" class="form-label">Category:</label>
+        <input type="text" class="form-control" id="category" name="category" value="{{ quiz.Category }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="difficulty" class="form-label">Difficulty:</label>
+        <select class="form-select" id="difficulty" name="difficulty" required>
+            <option value="leicht">Easy</option>
+            <option value="mittel">Medium</option>
+            <option value="schwer">Hard</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="status" class="form-label">Status:</label>
+        <select class="form-select" id="status" name="status" required>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="joinCode" class="form-label">Join Code:</label>
+        <input type="text" class="form-control" id="joinCode" name="joinCode" value="{{ quiz.JoinCode }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="startedAt" class="form-label">Started At:</label>
+        <input type="datetime-local" class="form-control" id="startedAt" name="startedAt" value="{{ quiz.StartedAt }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="closedAt" class="form-label">Closed At:</label>
+        <input type="datetime-local" class="form-control" id="closedAt" name="closedAt" value="{{ quiz.ClosedAt }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">{% if quiz is defined %} Change {% else %} Create {% endif %} Quiz</button>
+</form>
+
+{% endblock main %}
