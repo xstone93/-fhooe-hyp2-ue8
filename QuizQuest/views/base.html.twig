@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <title>{% block title %}QuizQuest{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ get_base_path() }}/../views/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ get_base_path() }}/../views/css/main.css">
+        <link rel="icon" href="{{ get_base_path() }}/../views/images/fhooe-router-logo.svg" type="image/svg+xml">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select-country@4.2.0/dist/js/bootstrap-select-country.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select-country@4.2.0/dist/js/bootstrap-select-country.min.js"></script>
+    {% endblock head %}
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        {% block header %}
+            <a href="{{ url_for("/") }}"
+               class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <span class="fs-4">QuizQuest</span>
+            </a>
+
+            <ul class="nav nav-pills">
+
+                <li class="nav-item">
+                    <a href="{{ url_for("/quizoverview") }}" class="nav-link">Quizzes</a>
+                </li>
+
+                {% if _session.isLoggedin is defined %}
+
+                    <li class="nav-item">
+                        <a href="{{ url_for("/quizcreate") }}" class="nav-link">New Quiz</a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for("/logout") }}">Logout</a>
+                    </li>
+                {%  else  %}
+                    <li class="nav-item">
+                        <a href="{{ url_for("/login") }}" class="nav-link">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a href="{{ url_for("/register") }}" class="nav-link">Register</a>
+                </li>
+                {%  endif  %}
+
+                <li class="nav-item">
+                    {{user.id}}
+                </li>
+                
+
+            </ul>
+        {% endblock header %}
+    </header>
+
+    <main>
+        {% block main %}
+        {% endblock main %}
+    </main>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        {% block footer %}
+            <div class="col-lg-9 d-flex align-items-center">
+                QuizQuest, 2024
+            </div>
+        {% endblock footer %}
+    </footer>
+</div>
+<script src="{{ get_base_path() }}/../views/js/bootstrap.bundle.min.js"></script>
+<script src="{{ get_base_path() }}/../views/js/main.js"></script>
+</body>
+</html>

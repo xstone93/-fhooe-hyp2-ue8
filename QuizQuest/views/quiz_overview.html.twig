@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+
+{% block title %}QuizQuest{% endblock %}
+
+{% block main %}
+    <hgroup>
+        <h1>QuizQuest</h1>
+        <p class="lead">Your favorite quiz game!</p>
+    </hgroup>
+
+    <form action="/join_quiz" method="POST"  style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="form-group text-center col-2">
+            <label for="join-code">Join Code:</label>
+            <input type="text" id="join-code" name="join-code" class="form-control" required maxlength="5" size="5">
+        </div>
+        <div class="text-center mt-1">
+            <button type="submit" class="btn btn-primary">Join Quiz</button>
+        </div>
+    </form>
+
+    <div class="container mt-4">
+        <h2>Open Games</h2>
+        <div class="row">
+            {% for game in quizzes %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img class="card-img-top" src="https://lehrerweb.wien/fileadmin/_processed_/0/e/csm_quiz-2192590_1920_7feb491723.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ game.Title }}</h5>
+                            <p class="card-text">{{ game.Category }}</p>
+                            <p class="card-text">{{ game.answeredQuestions }} /  {{ game.totalQuestions }}</p>
+                            <p class="card-text">{{ game.Difficulty }}</p>
+                            <p class="card-text">{{ game.StartedAt }} {{ game.ClosedAt }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-3">
+                                    <form method="get" action="{{ url_for("/quizshow") }}"> 
+                                        <button type="submit" class="btn btn-success" name="id" value="{{ game.ID }}">Show</button>
+                                    </form>
+                                </div>
+                                <div class="col-3">
+                                    <form method="get" action="{{ url_for("/quizmodify") }}"> 
+                                        <button type="submit" class="btn btn-warning" name="id" value="{{ game.ID }}">Modify</button>
+                                    </form>
+                                </div>
+                                <div class="col-3">
+                                    <form method="get" action="{{ url_for("/quizquestions") }}"> 
+                                        <button type="submit" class="btn btn-info" name="id" value="{{ game.ID }}">Questions</button>
+                                    </form>
+                                </div>                                
+                                <div class="col-3">
+                                    <form method="post" action="{{ url_for("/quizdelete") }}"> 
+                                        <button type="submit" class="btn btn-danger" name="id" value="{{ game.ID }}">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock main %}

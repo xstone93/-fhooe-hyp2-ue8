@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}QuizQuest{% endblock title %}
+
+{% block main %}
+<div class="border p-3 mt-5">
+    <h3>Login</h3>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            {{ success }}
+        </div>
+    {% endif %}
+    <form method="post" action="{{ url_for("/register") }}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="origin">Country of Origin</label>
+                <select class="form-control" id="origin" name="origin" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="AT">Austria</option>
+                    <option value="DE">Germany</option>
+                    <option value="CH">Switzerland</option>
+                </select>
+            </div>
+            <div class="form-group mt-2" >
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+    </form>
+</div>
+{% endblock main %}

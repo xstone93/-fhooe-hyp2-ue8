@@ -1,0 +1,48 @@
+{
+    "name": "fhooe/twig-extensions",
+    "description": "A collection of Twig extensions for other fhooe packages",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "Twig",
+        "extensions",
+        "education",
+        "routing",
+        "sessions"
+    ],
+    "authors": [
+        {
+            "name": "Wolfgang Hochleitner",
+            "email": "wolfgang.hochleitner@fh-hagenberg.at",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "fhooe/router": "^1.0",
+        "twig/twig": "^3.8"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.32",
+        "phpstan/phpstan": "^1.10"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Fhooe\\Twig\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "pest": "pest",
+        "phpstan": "phpstan analyse src --memory-limit=-1 --level 9 || true",
+        "test": [
+            "@phpstan",
+            "@pest"
+        ]
+    }
+}

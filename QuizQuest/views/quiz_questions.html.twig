@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}QuizQuest{% endblock %}
+
+{% block main %}
+
+<hgroup>
+    <h1>QuizQuest</h1>
+    <p class="lead">Your favorite quiz game!</p>
+</hgroup>
+
+<form action=" {{ url_for('/quizquestions') }} " method="POST" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div class="form-group text-center col-6">
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" class="form-control" required>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" class="form-control" required>
+
+        <label for="correctAnswer">Correct Answer:</label>
+        <input type="text" id="correctAnswer" name="correctAnswer" class="form-control" required>
+
+        <label for="wrongAnswer1">Wrong Answer 1:</label>
+        <input type="text" id="wrongAnswer1" name="wrongAnswer1" class="form-control" required>
+
+        <label for="wrongAnswer2">Wrong Answer 2:</label>
+        <input type="text" id="wrongAnswer2" name="wrongAnswer2" class="form-control" required>
+
+        <label for="wrongAnswer3">Wrong Answer 3:</label>
+        <input type="text" id="wrongAnswer3" name="wrongAnswer3" class="form-control" required>
+
+        <input type="hidden" id="quizId" name="quizId" value="{{ quiz.ID }}">
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+    
+{% endblock main %}
